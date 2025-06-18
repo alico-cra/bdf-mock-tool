@@ -1,0 +1,60 @@
+name: Test
+
+on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+
+jobs:
+    extract-python-version:
+        runs-on: ubuntu-latest
+        outputs:
+            python-version: ${{ steps.python-version.outputs.version }}
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+        
+          - name: Extract Python version from pyproject.toml
+            id: python-version
+            run: |
+              python3 -c "
+              import tomllib
+              import re
+            
+              with open('pyproject.toml', 'rb') as f:
+                data = tomllib.load(f)
+            
+              # Get requires-python from project section
+              requires_python = data.get('project', {}).get('requires-python', '')
+            
+              if not requires_python:
+                print('No requires-python found, defaulting to 3.12')
+                version = '3.12.9'
+              else:
+                # Parse version constraint (e.g., '>=3.9' -> '3.9')
+                version_match = re.search(r'(\d+\.\d+)', requires_python)
+                if version_match:
+                    # Add patch version for Docker image compatibility
+                    version = version_match.group(1) + '.9'
+                else:
+                    print('Could not parse Python version, defaulting to 3.12.9')
+                    version = '3.12.9'
+            
+              print(f'version={version}')
+              " >> $GITHUB_OUTPUT
+    validate-all-performer-tools:
+        needs: extract-python-version
+        runs-on: ubuntu-latest
+        container:
+            image: python:${{ needs.extract-python-version.outputs.python-version }}
+        
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+    
+        - name: Install uv and validate tools
+          run: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            export PATH=$PATH:$HOME/.local/bin
+            uv run main.py
