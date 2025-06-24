@@ -4,6 +4,3 @@ version = "0.1.0"
 description = "A mock tool for testing against"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "linkml>=1.9.2",
-]
