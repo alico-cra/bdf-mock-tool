@@ -48,6 +48,7 @@ jobs:
         uses: ARPA-H-BDF/bdfkb-schema/.github/workflows/ci-validate.yaml@bdf-ci-reusable-workflow
         with:
           python-version: ${{ needs.extract-python-version.outputs.python-version }}
+          validation-branch: "bdf-ci-reusable-workflow"
         # runs-on: ubuntu-latest
         # container:
         #     image: python:${{ needs.extract-python-version.outputs.python-version }}
