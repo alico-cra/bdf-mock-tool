@@ -128,7 +128,7 @@ def validate_directory(directory_path, schema_path, target_class):
 # Example usage
 if __name__ == "__main__":
     DATA_DIRECTORY = "."
-    SCHEMA_PATH = "https://raw.githubusercontent.com/ARPA-H-BDF/bdfkb-schema/refs/heads/main/src/bdfkb_schema/schema/bdfkb_schema.yaml"
+    SCHEMA_PATH = "https://raw.githubusercontent.com/cra-ichan/bdfkb-schema/refs/heads/api-url-field/src/bdfkb_schema/schema/bdfkb_schema.yaml"
     TARGET_CLASS = "SystemMetadata"
 
     validate_directory(DATA_DIRECTORY, SCHEMA_PATH, TARGET_CLASS)
