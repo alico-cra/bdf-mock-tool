@@ -3,9 +3,20 @@ version: v0.0.1
 tool:
   name: Test
   repo_url: https://github.com
+  api_url: http://api.indra.bio:8000/
   tool_homepage: https://example.com
   documentation_url: https://example.com
-  tool_type: Library
+  tool_type: WebAPI
+
+api:
+  api_request:
+    - request_type: POST
+      endpoint: /trips/process_text
+      parameters:
+        - name: payload
+          parameter_type: object
+          example: '{"text": "GRB2 binds SHC."}'
+          required: true
 
 llm:
   usesLlm: true
