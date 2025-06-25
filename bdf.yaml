@@ -3,7 +3,7 @@ version: v0.0.1
 tool:
   name: Test
   repo_url: https://github.com
-  api_url: http://api.indra.bio:8000
+  api_url: https://petstore.swagger.io/v2
   tool_homepage: https://example.com
   documentation_url: https://example.com
   tool_type: WebAPI
