@@ -49,6 +49,7 @@ jobs:
         with:
           python-version: ${{ needs.extract-python-version.outputs.python-version }}
           validation-branch: "bdf-ci-reusable-workflow"
+          schema-url: 'https://raw.githubusercontent.com/ARPA-H-BDF/bdfkb-schema/refs/heads/main/src/bdfkb_schema/schema/bdfkb_schema.yaml'
         # runs-on: ubuntu-latest
         # container:
         #     image: python:${{ needs.extract-python-version.outputs.python-version }}
