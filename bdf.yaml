@@ -14,7 +14,6 @@ api:
       endpoint: /pet
       parameters:
         - name: body
-          parameter_type: object
           required: true
           example:
             id: 123456
@@ -32,7 +31,6 @@ api:
       endpoint: /pet
       parameters:
         - name: body
-          parameter_type: object
           required: true
           example: >
             {
@@ -47,14 +45,12 @@ api:
       endpoint: /pet/{petId}
       parameters:
         - name: petId
-          parameter_type: integer
           required: true
           example: 123456
     - request_type: DELETE
       endpoint: /pet/{petId}
       parameters:
         - name: petId
-          parameter_type: integer
           required: true
           example: 123456
         - name: api_key
