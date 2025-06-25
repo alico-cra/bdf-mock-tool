@@ -54,7 +54,6 @@ api:
           required: true
           example: 123456
         - name: api_key
-          parameter_type: string
           required: false
           example: "fake-key"
 
