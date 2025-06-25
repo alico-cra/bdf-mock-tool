@@ -11,12 +11,56 @@ tool:
 api:
   api_request:
     - request_type: POST
-      endpoint: /trips/process_text
+      endpoint: /pet
       parameters:
-        - name: payload
+        - name: body
           parameter_type: object
-          example: '{"text": "GRB2 binds SHC."}'
           required: true
+          example:
+            id: 123456
+            category:
+              id: 1
+              name: Dogs
+            name: Buddy
+            photoUrls:
+              - http://example.com/photo1.jpg
+            tags:
+              - id: 1
+                name: friendly
+            status: available
+    - request_type: PUT
+      endpoint: /pet
+      parameters:
+        - name: body
+          parameter_type: object
+          required: true
+          example: >
+            {
+              "id": 123456,
+              "category": {"id": 1, "name": "Dogs"},
+              "name": "Fido",
+              "photoUrls": ["http://example.com/photo.jpg"],
+              "tags": [{"id": 1, "name": "tag1"}],
+              "status": "sold"
+            }
+    - request_type: GET
+      endpoint: /pet/{petId}
+      parameters:
+        - name: petId
+          parameter_type: integer
+          required: true
+          example: 123456
+    - request_type: DELETE
+      endpoint: /pet/{petId}
+      parameters:
+        - name: petId
+          parameter_type: integer
+          required: true
+          example: 123456
+        - name: api_key
+          parameter_type: string
+          required: false
+          example: "fake-key"
 
 llm:
   usesLlm: true
