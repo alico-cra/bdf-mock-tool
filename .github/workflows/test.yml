@@ -48,16 +48,3 @@ jobs:
         uses: ARPA-H-BDF/bdfkb-schema/.github/workflows/ci-validate.yaml@main
         with:
           python-version: ${{ needs.extract-python-version.outputs.python-version }}
-        # runs-on: ubuntu-latest
-        # container:
-        #     image: python:${{ needs.extract-python-version.outputs.python-version }}
-        
-        # steps:
-        # - name: Checkout code
-        #   uses: actions/checkout@v4
-    
-        # - name: Install uv and validate tools
-        #   run: |
-        #     curl -LsSf https://astral.sh/uv/install.sh | sh
-        #     export PATH=$PATH:$HOME/.local/bin
-        #     uv run main.py
