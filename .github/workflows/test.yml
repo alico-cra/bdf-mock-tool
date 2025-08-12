@@ -45,11 +45,9 @@ jobs:
               " >> $GITHUB_OUTPUT
     validate-all-performer-tools:
         needs: extract-python-version
-        uses: ARPA-H-BDF/bdfkb-schema/.github/workflows/ci-validate.yaml@bdf-ci-reusable-workflow
+        uses: ARPA-H-BDF/bdfkb-schema/.github/workflows/ci-validate.yaml@main
         with:
           python-version: ${{ needs.extract-python-version.outputs.python-version }}
-          validation-branch: "bdf-ci-reusable-workflow"
-          schema-url: 'https://raw.githubusercontent.com/ARPA-H-BDF/bdfkb-schema/refs/heads/main/src/bdfkb_schema/schema/bdfkb_schema.yaml'
         # runs-on: ubuntu-latest
         # container:
         #     image: python:${{ needs.extract-python-version.outputs.python-version }}
