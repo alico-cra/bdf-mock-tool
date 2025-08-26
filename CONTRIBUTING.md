@@ -1,0 +1,1 @@
+These are details on how you can contribute to this project.
