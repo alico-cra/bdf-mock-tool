@@ -1,0 +1,12 @@
+{
+    "name": "bdf-mock-tool",
+    "version": "1.0.0",
+    "private": "false",
+    "scripts": {},
+    "devDependencies": {},
+    "engines": {
+        "npm": ">=10.0.0",
+        "node": ">=22.0.0"
+    },
+    "packageManager": "yarn@4.2.1"
+}
