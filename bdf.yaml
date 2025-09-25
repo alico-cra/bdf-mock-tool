@@ -55,7 +55,7 @@ maturity:
   current_maturity: 7
 
 license:
-  license_type: BSD-2-Clause
+  license_type: MIT
   link: https://example.com
 
 target_users:
