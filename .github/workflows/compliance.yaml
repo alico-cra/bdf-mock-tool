@@ -1,0 +1,43 @@
+name: CI - Health App Compliance
+
+# This file goes in your TOOL repository at: .github/workflows/compliance.yaml
+# It calls the reusable workflow from your template repository
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    # Extract Python version from your project (optional)
+    extract-python-version:
+        runs-on: ubuntu-latest
+        outputs:
+            python-version: ${{ steps.get-version.outputs.python-version }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Get Python version
+              id: get-version
+              run: |
+                  # Try to extract from pyproject.toml, .python-version, or default to 3.13
+                  if [ -f "pyproject.toml" ]; then
+                    VERSION=$(grep -oP 'requires-python = ">=\K[0-9.]+' pyproject.toml | head -1 || echo "3.13")
+                  elif [ -f ".python-version" ]; then
+                    VERSION=$(cat .python-version)
+                  else
+                    VERSION="3.13"
+                  fi
+                  echo "python-version=$VERSION" >> $GITHUB_OUTPUT
+                  echo "Detected Python version: $VERSION"
+
+    # Run the compliance assessment using the reusable workflow
+    compliance-assessment:
+        needs: extract-python-version
+        uses: alico-cra/HIPAA-Health-App-Check/.github/workflows/compliance-check.yaml@main
+        with:
+            python-version: ${{ needs.extract-python-version.outputs.python-version }}
+            fail-on-warnings: true
+            upload-report: true
